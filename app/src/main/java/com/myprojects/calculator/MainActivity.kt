@@ -42,6 +42,72 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onEqual(view: View) {
+        var tvValue = textView?.text.toString()
+        var prefix = ""
+
+        if(lastNumeric) {
+            if(tvValue.startsWith("-")) {
+                prefix = "-"
+                tvValue = tvValue.substring(1)
+            }
+
+            if(tvValue.contains("-")) {
+                try {
+                    val splitArr = tvValue.split("-")
+                    var opOne = splitArr[0]
+                    val opTwo = splitArr[1]
+
+                    if(prefix.isNotEmpty()) {
+                        opOne = prefix + opOne
+                    }
+
+                    val result = opOne.toDouble() - opTwo.toDouble()
+                    textView?.text = result.toString()
+
+                }catch (e: ArithmeticException) {
+                    e.printStackTrace()
+                }
+            }else if(tvValue.contains("+")) {
+                try {
+                    val splitArr = tvValue.split("+")
+                    var opOne = splitArr[0]
+                    val opTwo = splitArr[1]
+
+                    val result = opOne.toDouble() + opTwo.toDouble()
+                    textView?.text = result.toString()
+
+                }catch (e: ArithmeticException) {
+                    e.printStackTrace()
+                }
+            }else if(tvValue.contains("*")) {
+                try {
+                    val splitArr = tvValue.split("*")
+                    var opOne = splitArr[0]
+                    val opTwo = splitArr[1]
+
+                    val result = opOne.toDouble() * opTwo.toDouble()
+                    textView?.text = result.toString()
+
+                }catch (e: ArithmeticException) {
+                    e.printStackTrace()
+                }
+            }else if(tvValue.contains("/")) {
+                try {
+                    val splitArr = tvValue.split("/")
+                    var opOne = splitArr[0]
+                    val opTwo = splitArr[1]
+
+                    val result = opOne.toDouble() / opTwo.toDouble()
+                    textView?.text = result.toString()
+
+                }catch (e: ArithmeticException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
     fun onOperator(view: View) {
         textView?.text?.let {
             if (lastNumeric && !isOperatorAdded(it.toString())) {
